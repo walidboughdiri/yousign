@@ -75,7 +75,8 @@ class GetSignatureRequestsSignatureRequestIdDocumentsDownload extends \IIYousign
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (200 === $status) {
+        if (is_null($contentType) === false && (200 === $status && (mb_strpos($contentType, 'application/pdf') !== false || mb_strpos($contentType, 'application/zip') !== false))) {
+            return $body;
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \IIYousign\Exception\GetSignatureRequestsSignatureRequestIdDocumentsDownloadBadRequestException($serializer->deserialize($body, 'IIYousign\\Model\\ResponseBadRequestError', 'json'));
