@@ -58,7 +58,7 @@ class GetSignatureRequestsSignatureRequestIdDocumentsDownload extends \IIYousign
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->setAllowedTypes('version', ['string']);
-        $optionsResolver->setAllowedTypes('archive', ['bool']);
+        $optionsResolver->setAllowedTypes('archive', ['string']);
 
         return $optionsResolver;
     }
